@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+    <head>
+        <link rel = "stylesheet" href = "bootstrap.min.css">
+        <link rel = "stylesheet" href = "home.css">
+    </head>
+
+   
+    <body style = "background-image: url(https://previews.123rf.com/images/famveldman/famveldman1505/famveldman150500048/39757261-kids-playing-with-wooden-toys-two-children-cute-toddler-girl-and-funny-baby--playing-with-wooden-.jpg); background-size: cover;">
+
+    <h1 style = "color:black;">Welcome <%= name %> </h1>
+    <hr style = "background-color: black; height: 3px; border: none;">
+
+    <% var count = 0; %>
+    <div class = "container">
+        <% questions.forEach(function(question){ %>
+        <div>    
+            <p style = "color:black; font-weight: 800; font-size: 40px;"><%= count+1%></p>
+            <div class = "row">
+                <form action = "/results" method = "POST">
+                <% question.images.forEach(function(image){ %>
+                   
+                    <div class = "col-xs-2" style = "border-style: dashed; border: 5px; border-color: black;">
+                        <div class = "img-responsive">
+                            <img src = "<%=image%>" style="width: 150px; height: 240px;">
+                            <input type = "radio" name = "<%=count%>" value = "<%=image%>">
+                        </div>
+                    </div>
+               <% }); %>
+
+                    <%count++%>
+
+              
+                <div class = "col-xs-3" style = "margin-top: 10px;">
+                    <audio id="myAudio<%=count%>">
+                        <source src="<%=question.audio%>" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                    <button onclick="var x = document.getElementById('myAudio<%=count%>'); x.play();" type="button">Play Audio</button>
+                </div>
+            </div>
+
+            <p style = "height: 5px;"></p>
+                
+        </div>
+        <% }); %>
+    </div>
+
+    <div class = "container" style = "width:80%; margin: 50px auto; text-align: center;">
+        <!--<form action = "/results" method = "POST">-->
+            <button class = "btn btn-success">
+                Submit Test And Show Results.(Take a screenshot)
+            </button>
+        </form>
+    </div>
+    </body>
+    </html>
